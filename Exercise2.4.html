@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Sorter</title>
+</head>
+<body>
+
+    <h1>Enter Numbers</h1>
+    <button id="startButton">Start Entering Numbers</button>
+
+    <script>
+        // Function to collect numbers
+        function collectNumbers() {
+            let numbers = [];
+            let input;
+
+            // Loop to prompt user for numbers until zero is entered
+            do {
+                input = prompt("Enter a number (enter 0 to finish):");
+
+                // Check if the user clicked Cancel
+                if (input === null) {
+                    alert("Input canceled.");
+                    return; // Exit if Cancel is clicked
+                }
+
+                // Convert the input to a number
+                let number = Number(input);
+
+                // Only add valid numbers (not NaN) to the array
+                if (!isNaN(number)) {
+                    numbers.push(number);
+                } else {
+                    alert("Please enter a valid number."); // Prompt if the input is not a number
+                }
+
+            } while (input !== "0"); // Continue until 0 is entered
+
+            // Remove the last element (0) from the array
+            numbers.pop();
+
+            // Sort numbers in descending order
+            numbers.sort((a, b) => b - a);
+
+            // Display the sorted numbers in the console
+            console.log("Numbers in descending order:", numbers);
+        }
+
+        // Start the process when the button is clicked
+        document.getElementById("startButton").addEventListener("click", collectNumbers);
+    </script>
+
+</body>
+</html>

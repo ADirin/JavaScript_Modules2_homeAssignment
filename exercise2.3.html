@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dog Names Registration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        ul {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Enter Dog Names</h1>
+    <button id="startButton">Start Entering Dog Names</button>
+    <div id="dogList"></div>
+
+    <script>
+        // Function to collect dog names
+        function collectDogNames() {
+            // Initialize an array to hold dog names
+            let dogNames = [];
+
+            // Loop to get 6 dog names from the user
+            for (let i = 0; i < 6; i++) {
+                let name = prompt(`Enter the name of dog ${i + 1}:`);
+
+                // Check if the user has clicked Cancel
+                if (name === null) {
+                    alert("Input canceled. Please reload the page to try again.");
+                    return; // Exit the function if Cancel is clicked
+                }
+
+                // Add the name to the dogNames array
+                if (name.trim() !== "") { // Ensure valid input
+                    dogNames.push(name);
+                } else {
+                    alert("Please enter a valid name."); // Prompt if the name is empty
+                    i--; // Decrement counter to repeat this iteration
+                }
+            }
+
+            // Sort dog names in reverse alphabetical order
+            dogNames.sort().reverse();
+
+            // Display dog names in an unordered list
+            displayDogNames(dogNames);
+        }
+
+        // Function to display the dog names on the web page
+        function displayDogNames(dogNames) {
+            let listDiv = document.getElementById("dogList");
+            listDiv.innerHTML = ""; // Clear previous entries
+
+            // Create an unordered list
+            let ul = document.createElement("ul");
+
+            // Add each dog name to the list
+            dogNames.forEach(name => {
+                let li = document.createElement("li");
+                li.textContent = name;
+                ul.appendChild(li);
+            });
+
+            // Append the unordered list to the div
+            listDiv.appendChild(ul);
+        }
+
+        // Start the process when the button is clicked
+        document.getElementById("startButton").addEventListener("click", collectDogNames);
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Participants List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        ol {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Participants Registration</h1>
+    <button id="startButton">Start</button>
+    <div id="participantList"></div>
+
+    <script>
+        // Function to prompt for participant names and display them
+        function collectParticipants() {
+            // Initialize an array to hold participant names
+            let participants = [];
+            let name;
+
+            // Loop to collect participant names
+            while (true) {
+                name = prompt("Enter the name of the participant (or click Cancel to finish):");
+
+                // Check if the user clicked Cancel
+                if (name === null) {
+                    break; // Exit the loop if Cancel is clicked
+                }
+
+                // Add the name to the participants array
+                if (name.trim() !== "") { // Avoid adding empty names
+                    participants.push(name);
+                } else {
+                    alert("Please enter a valid name."); // Prompt if the name is empty
+                }
+            }
+
+            // Sort participants in alphabetical order
+            participants.sort();
+
+            // Display participants in an ordered list
+            displayParticipants(participants);
+        }
+
+        // Function to display the participants on the web page
+        function displayParticipants(participants) {
+            let listDiv = document.getElementById("participantList");
+            listDiv.innerHTML = ""; // Clear previous entries
+
+            // Create an ordered list
+            let ol = document.createElement("ol");
+
+            // Add each participant name to the list
+            participants.forEach(participant => {
+                let li = document.createElement("li");
+                li.textContent = participant;
+                ol.appendChild(li);
+            });
+
+            // Append the ordered list to the div
+            listDiv.appendChild(ol);
+        }
+
+        // Start the process when the button is clicked
+        document.getElementById("startButton").addEventListener("click", collectParticipants);
+    </script>
+
+</body>
+</html>
